@@ -52,7 +52,7 @@ angular.module('ds.checkout')
             $scope.order.shippingCost = shippingCost.price[GlobalData.getCurrencyId()];
             $scope.user = GlobalData.user;
             $scope.addresses = [];
-            var selectedAddress;
+            var selectedShippingAddress, selectedBillingAddress;
             var addressModalInstance;
 
             $scope.order.account = {};
@@ -64,17 +64,28 @@ angular.module('ds.checkout')
 
             $scope.$on('$destroy', unbind);
 
-            var decorateSelectedAddress = function(addresses) {
-                if (selectedAddress) {
+            var decorateSelectedAddress = function(addresses, target) {
+                if (target === $scope.order.shipTo && selectedShippingAddress) {
                     angular.forEach(addresses, function(addr) {
-                        if (addr.id === selectedAddress.id && !$scope.billToForm.$dirty) {
+                        if (addr.id === selectedShippingAddress.id && !$scope.billToForm.$dirty) {
                             addr.selected = true;
                         }
                         else {
                             addr.selected = false;
                         }
                     });
-                } else {
+                }
+                else if (target === $scope.order.billTo && selectedBillingAddress) {
+                    angular.forEach(addresses, function(addr) {
+                        if (addr.id === selectedBillingAddress.id) {
+                            addr.selected = true;
+                        }
+                        else {
+                            addr.selected = false;
+                        }
+                    });
+                }
+                else {
                     angular.forEach(addresses, function(addr) {
                         if (addr.isDefault) {
                             addr.selected = true;
@@ -254,8 +265,8 @@ angular.module('ds.checkout')
 
             $scope.toggleShipToSameAsBillTo = function(){
                 angular.forEach($scope.addresses, function (addr) {
-                    if (addr.id === $scope.order.billTo.id) {
-                        selectedAddress = addr;
+                    if (addr.id === $scope.order.billTo.id && !$scope.billToForm.$dirty) {
+                        selectedShippingAddress = addr;
                     }
                 });
                 if($scope.wiz.shipToSameAsBillTo){
@@ -394,7 +405,12 @@ angular.module('ds.checkout')
             };
 
             $scope.selectAddress = function(address, target) {
-                selectedAddress = address;
+                if (target === $scope.order.shipTo) {
+                    selectedShippingAddress = address;
+                }
+                else if (target === $scope.order.billTo) {
+                    selectedBillingAddress = address;
+                }
                 $scope.addresses = decorateSelectedAddress($scope.addresses);
                 addressModalInstance.close();
 
@@ -423,7 +439,7 @@ angular.module('ds.checkout')
                         addresses: function(AccountSvc) {
 
                             return AccountSvc.getAddresses().then(function(response) {
-                                $scope.addresses = decorateSelectedAddress(response);
+                                $scope.addresses = decorateSelectedAddress(response, target);
                                 $scope.isDialog = true;
                                 $scope.showAddressDefault = 6;
                                 $scope.showAddressFilter = $scope.showAddressDefault;
