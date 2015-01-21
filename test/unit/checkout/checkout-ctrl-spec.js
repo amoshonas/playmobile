@@ -87,6 +87,10 @@ describe('CheckoutCtrl', function () {
     }));
 
     beforeEach(function () {
+        $scope.billToForm = {
+            $dirty: false
+        };
+
         checkoutDfd = $q.defer();
 
         mockedCheckoutSvc.checkout = jasmine.createSpy('checkout').andCallFake(function() {

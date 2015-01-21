@@ -67,8 +67,11 @@ angular.module('ds.checkout')
             var decorateSelectedAddress = function(addresses) {
                 if (selectedAddress) {
                     angular.forEach(addresses, function(addr) {
-                        if (addr.id === selectedAddress.id) {
+                        if (addr.id === selectedAddress.id && !$scope.billToForm.$dirty) {
                             addr.selected = true;
+                        }
+                        else {
+                            addr.selected = false;
                         }
                     });
                 } else {
@@ -88,6 +91,7 @@ angular.module('ds.checkout')
             };
 
             var populateBillTo = function(address){
+                $scope.order.billTo.id = address.id;
                 $scope.order.billTo.contactName = address.contactName;
                 $scope.order.billTo.address1 = address.street;
                 $scope.order.billTo.address2 = address.streetAppendix;
@@ -249,8 +253,14 @@ angular.module('ds.checkout')
             };
 
             $scope.toggleShipToSameAsBillTo = function(){
+                angular.forEach($scope.addresses, function (addr) {
+                    if (addr.id === $scope.order.billTo.id) {
+                        selectedAddress = addr;
+                    }
+                });
                 if($scope.wiz.shipToSameAsBillTo){
                     setShipToSameAsBillTo();
+                    $scope.addresses = decorateSelectedAddress($scope.addresses);
                 } else {
                     clearShipTo();
                 }
@@ -385,8 +395,10 @@ angular.module('ds.checkout')
 
             $scope.selectAddress = function(address, target) {
                 selectedAddress = address;
+                $scope.addresses = decorateSelectedAddress($scope.addresses);
                 addressModalInstance.close();
 
+                target.id = address.id;
                 target.contactName = address.contactName;
                 target.address1 = address.street;
                 target.address2 = address.streetAppendix;
