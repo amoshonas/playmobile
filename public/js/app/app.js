@@ -27,6 +27,8 @@ window.app = angular.module('ds.router', [
     'ds.auth',
     'ds.orders',
     'ds.queue',
+    'ds.errors',
+    'ds.backendMock',
     'config',
     'xeditable',
     'ngSanitize',
@@ -85,7 +87,11 @@ window.app = angular.module('ds.router', [
                                 httpQueue.appendRejected(response.config, deferred);
                                 return deferred.promise;
                             }
+                        } else {
+                            // show error view
+                            $injector.get('$state').go('errors', { errorId : '401' });
                         }
+
                     } else if(response.status === 403){
                         // if 403 during login, should already be handled by auth dialog controller
                         if(response.config.url.indexOf('login')<0) {
@@ -105,6 +111,11 @@ window.app = angular.module('ds.router', [
                                 });
                             }
                         }
+                    } else if(response.status === 404 && response.config.url.indexOf('cart') < 0 ){
+                        $injector.get('$state').go('errors', { errorId : '404' });
+                    } else if(response.status === 500){
+                        //show error view with default message.
+                        $injector.get('$state').go('errors');
                     }
                     return $q.reject(response);
                 }
@@ -171,7 +182,7 @@ window.app = angular.module('ds.router', [
                     if(!fromState.name){
                         $state.go(settings.homeState);
                     }
-                    var dlg = $injector.get('AuthDialogManager').open({}, toState.name === settings.checkoutState?{ required: true } : {}, {}, toState.name === settings.checkoutState);
+                    var dlg = $injector.get('AuthDialogManager').open({windowClass:'mobileLoginModal'}, toState.name === settings.checkoutState?{ required: true } : {}, {}, toState.name === settings.checkoutState);
 
                     dlg.then(function(){
                             if(toState.name === settings.checkoutState){
@@ -295,7 +306,7 @@ window.app = angular.module('ds.router', [
                     resolve: {
                         product: function ($stateParams, PriceProductREST, CategorySvc, initialized) {
                             if(initialized){
-                                return PriceProductREST.ProductDetails.one('productdetails', $stateParams.productId).get()
+                                return PriceProductREST.ProductDetails.one('productdetails', $stateParams.productId).customGET('', {expand: 'media'})
                                     .then(function (prod) {
                                         if(prod.categories && prod.categories.length){
                                             return CategorySvc.getCategoryById(prod.categories[0].id).then(function(category){
@@ -340,6 +351,10 @@ window.app = angular.module('ds.router', [
                     url: '/checkout/',
                     views: {
                         'checkoutcart': {
+                            templateUrl: 'js/app/checkout/templates/checkout-cart.html',
+                            controller: 'CheckoutCartCtrl'
+                        },
+                        'checkoutcartmobile@base.checkout.details':{
                             templateUrl: 'js/app/checkout/templates/checkout-cart.html',
                             controller: 'CheckoutCartCtrl'
                         },
@@ -427,6 +442,15 @@ window.app = angular.module('ds.router', [
                     },
                     data: {
                         auth: 'authenticated'
+                    }
+                })
+                .state('errors', {
+                    url: '/errors/:errorId',
+                    views: {
+                        'main@': {
+                            templateUrl: 'js/app/errors/templates/error-display.html',
+                            controller: 'ErrorsCtrl'
+                        }
                     }
                 });
 
