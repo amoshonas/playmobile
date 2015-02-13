@@ -35,18 +35,6 @@ angular.module('ds.account')
             $scope.orders = orders;
             $scope.defaultAddress = getDefaultAddress();
 
-            // show more or less addresses.
-            $scope.showAddressDefault = 6;
-            $scope.showAddressButtons = ($scope.addresses.length >= $scope.showAddressDefault);
-            $scope.showAllAddressButton = true;
-            $scope.showAddressFilter = $scope.showAddressDefault;
-
-            // show more or less orders.
-            $scope.showOrdersDefault = 10;
-            $scope.showAllOrdersButton = true;
-            $scope.showOrderButtons = ($scope.orders.length >= $scope.showOrdersDefault);
-            $scope.showOrdersFilter = $scope.showOrdersDefault;
-
             $scope.currencies = GlobalData.getAvailableCurrencies();
 
             $scope.showCurrency = function () {
