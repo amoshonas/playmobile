@@ -5407,8 +5407,8 @@ button.close {
 .entities {
   overflow: hidden;
 }
-.entities .entityWrapper {
-  margin-right: 45px;
+.entities .entityWrapper:first-child {
+  margin-top: 15px;
 }
 .carousel {
   position: relative;
@@ -6158,10 +6158,6 @@ html.disable-scroll {
 #sidebar .popover .arrow {
   display: none;
 }
-#sidebar .selectorListContainer {
-  width: 187px;
-  text-align: left;
-}
 #sidebar .selectorListContainer .uppercase {
   text-transform: uppercase;
 }
@@ -6588,7 +6584,7 @@ html.disable-scroll {
   position: relative;
 }
 #sidebar .store-settings .configSelector .popover {
-  top: -170px !important;
+  top: -45px !important;
 }
 #full-cart-btn {
   outline: none;
