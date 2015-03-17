@@ -5404,12 +5404,6 @@ button.close {
   border-left-color: #ffffff;
   bottom: -10px;
 }
-.entities {
-  overflow: hidden;
-}
-.entities .entityWrapper:first-child {
-  margin-top: 15px;
-}
 .carousel {
   position: relative;
 }
@@ -6133,13 +6127,16 @@ html.disable-scroll {
 .popoverContainer {
   position: absolute;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 #sidebar {
   background: #eeeeee;
 }
 #sidebar .currencySelector,
 #sidebar .languageSelector {
   text-transform: uppercase;
-  padding: 0  0 20px 0;
+  padding: 0  0 10px 0;
   text-align: center;
 }
 #sidebar .currencySelector .popover-content,
@@ -6157,9 +6154,6 @@ html.disable-scroll {
 }
 #sidebar .popover .arrow {
   display: none;
-}
-#sidebar .selectorListContainer .uppercase {
-  text-transform: uppercase;
 }
 #sidebar .selectorListContainer .popoverHeader {
   font-weight: bold;
@@ -6190,6 +6184,13 @@ html.disable-scroll {
 }
 #sidebar .selectorListContainer .entity.active {
   cursor: default;
+}
+#sidebar .entityWrapper {
+  text-align: center;
+}
+#sidebar .entityWrapper span,
+#sidebar .entityWrapper a {
+  text-transform: uppercase;
 }
 #sidebar a.logo {
   display: block;
@@ -6569,7 +6570,7 @@ html.disable-scroll {
   line-height: 40px;
 }
 #sidebar .store-settings {
-  margin: 20px 0 100px;
+  margin: 10px 0 100px;
 }
 #sidebar .store-settings .selectContainer {
   margin: 0  10px;
@@ -6581,10 +6582,35 @@ html.disable-scroll {
   padding-left: 10px;
 }
 #sidebar .store-settings .configSelector {
-  position: relative;
+  background-color: #eeeeee;
 }
-#sidebar .store-settings .configSelector .popover {
-  top: -45px !important;
+#sidebar .store-settings .configSelector a:hover,
+#sidebar .store-settings .configSelector a:visited,
+#sidebar .store-settings .configSelector a:link {
+  text-decoration: none;
+}
+#sidebar .store-settings .configSelector .panel {
+  border: none;
+  box-shadow: none;
+}
+#sidebar .store-settings .configSelector .panel .panel-heading {
+  background-color: #eeeeee;
+  text-align: center;
+}
+#sidebar .store-settings .configSelector .panel .panel-heading span {
+  text-transform: uppercase;
+  color: #202122;
+  font-size: 14px;
+  line-height: 20px;
+}
+#sidebar .store-settings .configSelector .panel-body {
+  border: none;
+}
+#sidebar .store-settings .configSelector .panel-body .entityWrapper {
+  margin-bottom: 15px;
+}
+#sidebar .store-settings .configSelector .panel-body .entityWrapper:last-child {
+  margin-bottom: 0px;
 }
 #full-cart-btn {
   outline: none;

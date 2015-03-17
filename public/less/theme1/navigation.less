@@ -11,6 +11,9 @@
 .popoverContainer{
   position: absolute;
 }
+.uppercase{
+  text-transform: uppercase;
+}
 
 
 
@@ -18,10 +21,9 @@
 #sidebar{
 	background: @lightergrey;
 
-
     .currencySelector, .languageSelector{
       text-transform: uppercase;
-      padding: 0  0 20px 0;
+      padding: 0  0 10px 0;
       text-align: center;
 
       .popover-content {
@@ -46,10 +48,7 @@
     }
 
     .selectorListContainer{
-      .uppercase{
-        text-transform: uppercase;
-      }
-      
+
       .popoverHeader{
         font-weight: bold;
         padding: 20px 0 17px 0;
@@ -83,6 +82,12 @@
       }
       
     }
+  .entityWrapper{
+    text-align: center;
+    span,a{
+      text-transform: uppercase;
+    }
+  }
 
 
 
@@ -527,7 +532,7 @@
 	}
 
 	.store-settings{
-		margin: 20px 0 100px;
+		margin: 10px 0 100px;
        
       .selectContainer{
         margin: 0  10px;
@@ -536,9 +541,32 @@
 
       
       .configSelector{
-        position: relative;
-        .popover{
-          top: -45px !important;
+        background-color: @lightergrey;
+        a:hover, a:visited, a:link{
+            text-decoration: none;
+        }
+        .panel{
+          border: none;
+          box-shadow: none;
+          .panel-heading{
+            background-color: @lightergrey;
+            text-align: center;
+            span {
+              text-transform: uppercase;
+              color: @maxdarkgrey;
+              font-size: 14px;
+              line-height: 20px;
+            }
+          }
+        }
+        .panel-body{
+          border: none;
+          .entityWrapper{
+            margin-bottom: 15px;
+            &:last-child{
+              margin-bottom: 0px;
+            }
+          }
         }
       }
 	}

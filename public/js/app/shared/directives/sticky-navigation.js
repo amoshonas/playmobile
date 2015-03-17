@@ -31,7 +31,7 @@ angular.module('ds.shared')
             marginOffset = 0;
 
             $('.hy-stickyComponent').each(function(){
-                reservedHeight += $(this).outerHeight(true) ;
+                reservedHeight += $(this).outerHeight(true);
             });
 
             if($('.hy-flexibleHeightNav').length > 0)

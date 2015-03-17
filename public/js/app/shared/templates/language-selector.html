@@ -1,6 +1,6 @@
 <div class="selectorListContainer">
     <div class="entities">
-            <div ng-repeat="lang in languages" class="pull-left entityWrapper">
+        <div ng-repeat="lang in languages" class="pull-left entityWrapper">
             
             <span class="entity" ng-class="{'active': language.selected.iso == lang.iso}" ng-show="language.selected.iso == lang.iso">
                 <span class="uppercase">{{lang.value | translate}}</span>
