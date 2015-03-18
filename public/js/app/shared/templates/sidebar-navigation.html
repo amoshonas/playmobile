@@ -1,34 +1,9 @@
-<a ui-sref="base.home" class="logo hy-stickyComponent">
+<a ui-sref="base.home" class="logo">
     <img ng-src="{{store.logo || 'img/logo.png'}}" alt="" style="max-width:65px;">
 </a>
 
-<div class="authentication-cnt text-center hy-stickyComponent">
-    <div ng-if="user.isAuthenticated" >
-        <div class="signinContainer">
-            <a href="" class="my-profile" ng-click="myAccount()" title="{{'MY_ACCOUNT' | translate}}">
-                <img src="./img/user-icon_small_active.png" class="user-avatar">
-            </a>
-        </div>
-        <p>
-            <a ng-click="logout()" id="logout-btn" class="signout btn">{{'SIGN_OUT' | translate}}</a>
-        </p>
-    </div>
-
-    <div ng-if="!user.isAuthenticated">
-
-        <div class="signinContainer">
-            <a ng-if="!user.isAuthenticated" id="login-btn" class="signin btn btn-link hidden-xs hidden-sm" pop-over  data-placement="auto"  popover-Class="loginPopover" popover-Controller="AuthModalDialogCtrl" template-Url="js/app/auth/templates/auth.html">
-
-                <img src="./img/user-icon_small.png" class="user-avatar">
-                {{'SIGN_IN' | translate}}
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="hy-flexibleHeightNav" ng-cloak>
-    <div class="seperator"></div>
-    <ul ds-menu-aim class="navi hy-scrollingNav">
+<div ng-cloak>
+    <ul ds-menu-aim class="navi">
         <li ng-repeat="category in categories" class="js-listRoot"> <!-- class="has-sub" -->
             <a ui-sref="base.category( {catName: category.slug} )" class="mainCategory categoryLevel" ng-click="hideMobileNav()">
                 <span class="categoryDetail">{{ category.name  }}
@@ -49,11 +24,24 @@
                     </li>
                 </ul>
             </div>
-
         </li>
-
     </ul>
-    <div class="seperator"></div>
+    <div class="seperator hidden-xs hidden-sm"></div>
+</div>
+
+<div class="nav-signInOut">
+    <div class="signinContainer" ng-if="user.isAuthenticated">
+        <a ng-click="logout()" class="signout">{{'SIGN_OUT' | translate}}</a>
+        <a href="" class="my-profile" ng-click="myAccount()" title="{{'MY_ACCOUNT' | translate}}">
+            <img src="./img/user-icon_small_active.png" class="user-avatar">
+        </a>
+    </div>
+    <div class="signinContainer" ng-if="!user.isAuthenticated">
+        <a ng-if="!user.isAuthenticated" class="signin hidden-xs hidden-sm" id="login-btn" pop-over  data-placement="auto"  popover-Class="loginPopover" popover-Controller="AuthModalDialogCtrl" template-Url="js/app/auth/templates/auth.html">
+            {{'SIGN_IN' | translate}}
+            <img src="./img/user-icon_small.png" class="user-avatar">
+        </a>
+    </div>
 </div>
 
 <div class="store-settings hidden-md hidden-lg" >
@@ -69,63 +57,46 @@
     </div>
 </div>
 
-<div class="store-settings hy-stickyComponent hidden-sm hidden-xs" ng-cloak >
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-        <div class="configSelector" ng-controller="languageSelectorController">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="currentLocale">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseLocales" aria-expanded="false" aria-controls="collapseLocales">
-                        <span class="panel-title">
-                                {{language.selected.value | translate}}
+<div class="store-settings hidden-sm hidden-xs">
+    <div class="panel-group configSelector" id="accordionLocaleCurrency" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default configSelector" ng-controller="languageSelectorController">
+            <div class="panel-heading" role="tab" id="currentLocale">
+                <a data-toggle="collapse" data-parent="#accordionLocaleCurrency" href="#collapseLocales" aria-expanded="false" aria-controls="collapseLocales">
+                    <span class="panel-title">
+                                    {{language.selected.value | translate}}
                             <span class="caret"></span>
-                        </span>
+                    </span>
+                </a>
+            </div>
+            <div id="collapseLocales" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentLocale">
+                <div class="panel-body text-center" ng-if="languages.length > 1" ng-repeat="lang in languages" class="entityWrapper">
+                    <span class="entity" ng-class="{'active': language.selected.iso == lang.iso}" ng-show="language.selected.iso == lang.iso">
+                        <span>{{lang.value | translate}}</span>
+                    </span>
+                    <a  class="entity" ng-show="language.selected.iso != lang.iso" ng-click="updateLanguage(lang)">
+                        <span>{{lang.value | translate}}</span>
                     </a>
-                </div>
-                <div id="collapseLocales" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentLocale">
-                    <div class="panel-body" ng-if="languages.length > 1">
-                        <div ng-repeat="lang in languages" class="entityWrapper">
-                            <span class="entity" ng-class="{'active': language.selected.iso == lang.iso}" ng-show="language.selected.iso == lang.iso">
-                                <span>{{lang.value | translate}}</span>
-                            </span>
-                            <a  class="entity" ng-show="language.selected.iso != lang.iso" ng-click="updateLanguage(lang)">
-                                <span>{{lang.value | translate}}</span>
-                            </a>
-                        </div>
-                        <!--<div ng-repeat="lang in languages" class="entityWrapper">-->
-                            <!--<span class="entity" ng-class="{'active': language.selected.iso == lang.iso}" ng-show="language.selected.iso == lang.iso">-->
-                                <!--<span>{{lang.value | translate}}</span>-->
-                            <!--</span>-->
-                            <!--<a  class="entity" ng-show="language.selected.iso != lang.iso" ng-click="updateLanguage(lang)">-->
-                                <!--<span>{{lang.value | translate}}</span>-->
-                            <!--</a>-->
-                        <!--</div>-->
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="configSelector" ng-controller="currencySelectorController">
-            <div class="panel panel-default">
-                <div class="panel-heading currencySelectorContainer" role="tab" id="currentCurrency">
-                    <a class="currencySelector" ng-if="currencies.length > 1" data-toggle="collapse" data-parent="#accordion" href="#collapseCurrencies" aria-expanded="false" aria-controls="collapseCurrencies">
-                      <span class="panel-title">
+        <div class="panel panel-default configSelector" ng-controller="currencySelectorController">
+            <div class="panel-heading currencySelectorContainer" role="tab" id="currentCurrency">
+                <a class="currencySelector" ng-if="currencies.length > 1" data-toggle="collapse" data-parent="#accordionLocaleCurrency" href="#collapseCurrencies" aria-expanded="false" aria-controls="collapseCurrencies">
+                    <span class="panel-title">
                         {{currency.selected.id | translate}}
                         <span class="caret"></span>
-                     </span>
+                    </span>
+                </a>
+            </div>
+            <div id="collapseCurrencies" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentCurrency" ng-controller="currencySelectorController">
+                <div class="panel-body text-center" ng-if="currencies.length > 1" ng-repeat="currencyType in currencies" class="entityWrapper">
+                    <span class="entity" ng-class="{'active': currency.selected.label == currencyType.label}" ng-show="currency.selected.label == currencyType.label">
+                        <span>{{currencyType.label | translate}}</span>
+                    </span>
+                    <a class="entity" ng-show="currency.selected.label != currencyType.label" ng-click="updateCurrency(currencyType)">
+                        <span>{{currencyType.label | translate}}</span>
                     </a>
-                </div>
-                <div id="collapseCurrencies" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentCurrency" ng-controller="currencySelectorController">
-                    <div class="panel-body" ng-if="currencies.length > 1">
-                        <div ng-repeat="currencyType in currencies" class="entityWrapper">
-                            <span class="entity" ng-class="{'active': currency.selected.label == currencyType.label}" ng-show="currency.selected.label == currencyType.label">
-                                <span>{{currencyType.label | translate}}</span>
-                            </span>
-                            <a class="entity" ng-show="currency.selected.label != currencyType.label" ng-click="updateCurrency(currencyType)">
-                                <span>{{currencyType.label | translate}}</span>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -6135,7 +6135,6 @@ html.disable-scroll {
 }
 #sidebar .currencySelector,
 #sidebar .languageSelector {
-  text-transform: uppercase;
   padding: 0  0 10px 0;
   text-align: center;
 }
@@ -6143,11 +6142,8 @@ html.disable-scroll {
 #sidebar .languageSelector .popover-content {
   padding: 9px 0 9px 14px;
 }
-#sidebar .signinContainer {
-  position: relative;
-}
 #sidebar .signinContainer .popover {
-  top: -80px !important;
+  top: 30px !important;
 }
 #sidebar .popover {
   left: 210px !important;
@@ -6194,14 +6190,14 @@ html.disable-scroll {
 }
 #sidebar a.logo {
   display: block;
-  margin: 30px 0 ;
+  margin: 20px 0 15px 0;
   text-align: center;
 }
 #sidebar .mactive {
   color: #428bca !important;
 }
 #sidebar .seperator {
-  width: 36px;
+  width: 116px;
   height: 1px;
   background-color: #c4c4c4;
   margin: 0 auto;
@@ -6258,34 +6254,25 @@ html.disable-scroll {
   margin: 0 0 40px 0;
 }
 #sidebar .mainCategory {
-  padding: 0 15px;
+  padding: 0 10px;
 }
 @media (min-width: 992px) {
   #sidebar .navi {
-    margin: 5px 0 5px 0;
+    margin: 5px 0 25px 0;
     padding-left: 0;
     list-style: none;
-    overflow-y: auto;
-    overflow-x: hidden;
   }
   #sidebar .navi .hyicon {
     display: none;
-  }
-  #sidebar .navi .seperator {
-    width: 36px;
-    height: 1px;
-    background-color: #838485;
-    margin: 0 auto;
   }
   #sidebar .navi > li > a {
     display: block;
     color: #202122;
     font-size: 15px;
     text-decoration: none;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 10px 0 10px 45px;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
   }
   #sidebar .navi > li > a:hover {
     text-decoration: none;
@@ -6377,6 +6364,9 @@ html.disable-scroll {
   }
 }
 @media (max-width: 1199px) {
+  #sidebar ::-webkit-scrollbar {
+    display: none;
+  }
   #sidebar .categoryDetail {
     overflow: hidden;
   }
@@ -6569,9 +6559,6 @@ html.disable-scroll {
 #sidebar .social-icons a span {
   line-height: 40px;
 }
-#sidebar .store-settings {
-  margin: 10px 0 100px;
-}
 #sidebar .store-settings .selectContainer {
   margin: 0  10px;
 }
@@ -6595,22 +6582,41 @@ html.disable-scroll {
 }
 #sidebar .store-settings .configSelector .panel .panel-heading {
   background-color: #eeeeee;
-  text-align: center;
 }
-#sidebar .store-settings .configSelector .panel .panel-heading span {
-  text-transform: uppercase;
-  color: #202122;
+#sidebar .store-settings .configSelector .panel .panel-heading a {
+  padding-left: 35px;
+}
+#sidebar .store-settings .configSelector .panel .panel-heading a span {
+  color: #7d7e7f;
   font-size: 14px;
   line-height: 20px;
 }
 #sidebar .store-settings .configSelector .panel-body {
   border: none;
+  text-transform: uppercase;
+  color: #7d7e7f;
+  background-color: #f5f5f5;
+  padding: 10px;
 }
 #sidebar .store-settings .configSelector .panel-body .entityWrapper {
   margin-bottom: 15px;
 }
 #sidebar .store-settings .configSelector .panel-body .entityWrapper:last-child {
   margin-bottom: 0px;
+}
+#sidebar .nav-signInOut {
+  margin: 15px 0 15px 50px;
+}
+#sidebar .nav-signInOut a {
+  color: #7d7e7f;
+  cursor: pointer;
+}
+#sidebar .nav-signInOut a:hover {
+  text-decoration: none;
+}
+#sidebar .nav-signInOut a img {
+  margin-left: 10px;
+  width: 15%;
 }
 #full-cart-btn {
   outline: none;
@@ -8858,7 +8864,7 @@ body.disable-scroll .main {
   max-height: 100%;
 }
 body {
-  background: #f5f5f5;
+  background: #eeeeee;
 }
 body.fixedLayout {
   overflow-y: hidden !important;
