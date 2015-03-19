@@ -6160,7 +6160,6 @@ html.disable-scroll {
 }
 #sidebar .selectorListContainer .entity {
   text-decoration: none;
-  cursor: pointer;
   background-color: transparent;
   background-position: lefts;
   background-repeat: no-repeat;
@@ -6175,6 +6174,7 @@ html.disable-scroll {
 }
 #sidebar .selectorListContainer .entity:hover,
 #sidebar .selectorListContainer .entity.active {
+  cursor: pointer;
   color: #000 !important;
   background-image: url('../../img/language_select_active.png');
 }
@@ -6607,14 +6607,14 @@ html.disable-scroll {
 #sidebar .nav-signInOut {
   margin: 15px 0 15px 50px;
 }
-#sidebar .nav-signInOut a {
+#sidebar .nav-signInOut .signin {
   color: #7d7e7f;
   cursor: pointer;
 }
-#sidebar .nav-signInOut a:hover {
+#sidebar .nav-signInOut .signin:hover {
   text-decoration: none;
 }
-#sidebar .nav-signInOut a img {
+#sidebar .nav-signInOut .signin img {
   margin-left: 10px;
   width: 15%;
 }

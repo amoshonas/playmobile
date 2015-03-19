@@ -63,18 +63,15 @@
             <div class="panel-heading" role="tab" id="currentLocale">
                 <a data-toggle="collapse" data-parent="#accordionLocaleCurrency" href="#collapseLocales" aria-expanded="false" aria-controls="collapseLocales">
                     <span class="panel-title">
-                                    {{language.selected.value | translate}}
-                            <span class="caret"></span>
+                        {{language.selected.value | translate}}
+                        <span class="caret"></span>
                     </span>
                 </a>
             </div>
             <div id="collapseLocales" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentLocale">
-                <div class="panel-body text-center" ng-if="languages.length > 1" ng-repeat="lang in languages" class="entityWrapper">
-                    <span class="entity" ng-class="{'active': language.selected.iso == lang.iso}" ng-show="language.selected.iso == lang.iso">
-                        <span>{{lang.value | translate}}</span>
-                    </span>
-                    <a  class="entity" ng-show="language.selected.iso != lang.iso" ng-click="updateLanguage(lang)">
-                        <span>{{lang.value | translate}}</span>
+                <div class="panel-body text-center entityWrapper" >
+                    <a class="entity" ng-if="languages.length > 1" ng-repeat="lang in languages" ng-show="language.selected.iso != lang.iso" ng-click="updateLanguage(lang)" >
+                        {{lang.value | translate}}
                     </a>
                 </div>
             </div>
@@ -82,7 +79,7 @@
 
         <div class="panel panel-default configSelector" ng-controller="currencySelectorController">
             <div class="panel-heading currencySelectorContainer" role="tab" id="currentCurrency">
-                <a class="currencySelector" ng-if="currencies.length > 1" data-toggle="collapse" data-parent="#accordionLocaleCurrency" href="#collapseCurrencies" aria-expanded="false" aria-controls="collapseCurrencies">
+                <a class="currencySelector" data-toggle="collapse" data-parent="#accordionLocaleCurrency" href="#collapseCurrencies" aria-expanded="false" aria-controls="collapseCurrencies">
                     <span class="panel-title">
                         {{currency.selected.id | translate}}
                         <span class="caret"></span>
@@ -90,12 +87,9 @@
                 </a>
             </div>
             <div id="collapseCurrencies" class="panel-collapse collapse" role="tabpanel" aria-labelledby="currentCurrency" ng-controller="currencySelectorController">
-                <div class="panel-body text-center" ng-if="currencies.length > 1" ng-repeat="currencyType in currencies" class="entityWrapper">
-                    <span class="entity" ng-class="{'active': currency.selected.label == currencyType.label}" ng-show="currency.selected.label == currencyType.label">
-                        <span>{{currencyType.label | translate}}</span>
-                    </span>
-                    <a class="entity" ng-show="currency.selected.label != currencyType.label" ng-click="updateCurrency(currencyType)">
-                        <span>{{currencyType.label | translate}}</span>
+                <div class="panel-body text-center entityWrapper" >
+                    <a class="entity" ng-if="currencies.length > 1" ng-repeat="currencyType in currencies" ng-show="currency.selected.label != currencyType.label" ng-click="updateCurrency(currencyType)">
+                        {{currencyType.label | translate}}
                     </a>
                 </div>
             </div>
